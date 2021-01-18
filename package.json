@@ -1,0 +1,32 @@
+{
+  "name": "shawee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bookshelf": "^1.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.16",
+    "mysql2": "^2.2.5",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.1.2",
+    "sucrase": "^3.17.0"
+  },
+  "scripts": {
+    "dev": "nodemon ./src/server",
+    "build": "sucrase ./src -d ./dist --transforms imports",
+    "start": "node ./dist/app",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+    shawee_app:
+        container_name: shawee_app
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        image: shawee_app
+        volumes:
+        - .:/usr/src/app
+        ports:
+            - "3000:3000"
+        networks:
+            - shawee-network
+        depends_on:
+            - shawee_mysql
+        restart: always
+        entrypoint: ./docker/wait-for-it.sh shawee_mysql:3306 -- ./docker/docker-entrypoint.sh
+    shawee_mysql:
+        container_name: shawee_mysql
+        image: mysql
+        restart: always
+        ports:
+            - "3310:3306"
+        networks:
+            - shawee-network
+        environment:
+            MYSQL_HOST: shawee_mysql
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: challenger_shawee
+        security_opt:
+            - seccomp:unconfined
+
+networks:
+    shawee-network:
+        driver: bridge
